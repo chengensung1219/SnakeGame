@@ -21,6 +21,6 @@ This is a C++ game, so I will be using Xcode with C++ on it to develop the app. 
 
 # Future Work
 
-- A game score charts to record the users' name and score
-- Adding background music
+- A game score chart to record the users' name and score
+- Adding a background music
 - Built different game mode

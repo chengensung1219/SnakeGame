@@ -21,8 +21,6 @@ This is a C++ game, so I will be using Xcode with C++ on it to develop the app. 
 
 # Future Work
 
-{Make a list of things that you need to fix, improve, and add in the future.}
-
 - A game score charts to record the users' name and score
 - Adding background music
 - Built different game mode

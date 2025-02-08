@@ -11,6 +11,7 @@
 
 using namespace std;
 
+// Define colors for different elements in the game
 Color backgroundColor = {255, 255, 255, 255};
 Color foodColor = {255, 179, 27, 255};
 Color snakeColor = {112, 168, 206, 255};
@@ -18,6 +19,7 @@ Color boundaryColor = {57, 57, 57, 255};
 Color welcomeColor = {13, 1, 6, 255};
 Color blue = {1, 30, 255, 255};
 
+// Game configuration constants
 int squareSize = 20;
 int squareCount = 40;
 typedef enum { WELCOME, GAME_RUNNING, GAME_OVER } GameState;
@@ -25,17 +27,19 @@ int level = 4;
 int foodCount = 0;
 int score = 0;
 
-
+// Class representing food in the game
 class Food{
 public:
     Vector2 position = GetRandomPosition();
     
+    // Draws food on the screen
     void Draw(){
         int x = position.x * squareSize + 10;
         int y = position.y * squareSize + 10;
         DrawCircle(x, y, 10, foodColor);
     }
     
+    // Generates a random position for food within game boundaries
     Vector2 GetRandomPosition(){
         float x = GetRandomValue(2, squareCount - 3);
         float y = GetRandomValue(2, squareCount - 3);
@@ -44,22 +48,26 @@ public:
     }
 };
 
+// Class representing the Snake
 class Snake {
 public:
-    deque<Vector2> body = {Vector2{6, 9}, Vector2{5, 9}, Vector2{4, 9}};
-    Vector2 direction = {1, 0};
+    deque<Vector2> body = {Vector2{6, 9}, Vector2{5, 9}, Vector2{4, 9}}; // Initial snake position
+    Vector2 direction = {1, 0}; // Initial movement direction
     
+    // Draws the snake on the screen
     void Draw(){
         for (int i = 0; i < body.size(); i++){
             DrawRectangle(body[i].x * squareSize, body[i].y * squareSize, squareSize, squareSize, snakeColor);
         }
     }
     
+    // Moves the snake in the current direction
     void Move(){
         body.pop_back();
         body.push_front(Vector2{body[0].x + direction.x, body[0].y + direction.y});
     }
     
+    // Handles user input to change snake direction
     void HandleInput(GameState state) {
         if (state == GAME_OVER) return;
         switch (GetKeyPressed()) {
@@ -85,6 +93,7 @@ public:
                 break;
         }
     }
+    // Adds a new segment to the snake's body when eating food
     void Grow(){
         
         auto x = (body[body.size() - 2].x) - (body[body.size() - 1].x);
@@ -94,29 +103,34 @@ public:
     }
 };
 
+
+// Main Game class handling logic and rendering
 class Game{
 public:
     Snake snake = Snake();
     Food food = Food();
 
-    
+    // Draws all game elements
     void Draw(GameState state){
         food.Draw();
         snake.Draw();
         DisplayBoard(state);
     }
     
+    // Handles game mechanics like movement and food consumption
     void Checker(){
         snake.Move();
         EatFood();
         SetTargetFPS(level);
     }
     
+    // Handles user input
     void HandleInput(GameState state){
         
         snake.HandleInput(state);
     }
     
+    // Checks if the snake eats the food
     void EatFood(){
         if (snake.body[0].x == food.position.x && snake.body[0].y == food.position.y){
             
@@ -131,6 +145,7 @@ public:
         }
     }
     
+    // Displays game information such as score and level
     void DisplayBoard(GameState state){
         
         string scoreText = "SCORE: " + to_string(score);
@@ -154,7 +169,7 @@ public:
         
     }
 
-    
+    // Checks for game over conditions (collision with walls or self)
     bool GameOver(){
         Rectangle snakeHead = {snake.body[0].x * squareSize, snake.body[0].y * squareSize, (float)squareSize, (float)squareSize};
         Rectangle boundryTop = {35, 35, 730, 10};

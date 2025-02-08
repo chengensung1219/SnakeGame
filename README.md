@@ -10,9 +10,9 @@ The purpose of writing this software is to help me well prepare for game develop
 
 # Development Environment
 
-The tool that I going to use is Xcode which allows mac users to write C++ programs. I will also use YouTube and ChatGPT to help me answer those questions that I might not know.
+The tool that I going to use is Xcode which allows Mac users to write C++ programs. I will also use YouTube and ChatGPT to help me answer and learn those questions that I might not know.
 
-This is a C++ game, so I will be using Xcode with C++ on it to develop the app. Also, I will also be using Raylib library to help me for the basic game framework for snake game.
+This is a C++ game and I am a MacOS user, so I will be using Xcode with C++ on it to develop my software. Also, I will also be using the Raylib library to help me with the basic game framework for the snake game.
 
 # Useful Websites
 
